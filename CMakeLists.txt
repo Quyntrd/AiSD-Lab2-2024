@@ -1,15 +1,22 @@
-﻿# CMakeList.txt: проект CMake для CMakeProject1; включите исходный код и определения,
-# укажите здесь логику для конкретного проекта.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required(VERSION 3.11)
 
-project ("CMakeProject1")
+project (Map-v1 CXX)
 
-# Добавьте источник в исполняемый файл этого проекта.
-add_executable (CMakeProject1 "CMakeProject1.cpp" "CMakeProject1.h")
+set(CMAKE_CXX_STANDARD 23)
 
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET CMakeProject1 PROPERTY CXX_STANDARD 20)
+if (MSVC)
+
+	set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS true)
+
+	if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
+		string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+	else()
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4" )
+	endif()
 endif()
 
-# TODO: Добавьте тесты и целевые объекты, если это необходимо.
+add_library(Map-v1 SHARED "src/Map.cpp")
+
+target_include_directories(Map-v1 PUBLIC "src")
+add_executable (Map-v1-main "app/main.cpp")
+target_link_libraries(Map-v1-main Map-v1)
