@@ -44,8 +44,15 @@ int main() {
 	UnorderedMap<int, int> map1(10, 1, 5);
 	std::cout << "Map1: " << std::endl;
 	map1.print();
-	std::cout << "Count same numbers" << std::endl;
 	std::cout << "___________________" << std::endl;
+	std::cout << "Count same numbers" << std::endl;
 	count_same_numbers(map1, 1, 100);
+	UnorderedMap<char, char> mapchar(15, 1, 100);
+	std::cout << "___________________" << std::endl;
+	mapchar.print();
+	UnorderedMap<int, std::string> mapstring(15);
+	mapstring.insert(412, "One");
+	std::cout << "___________________" << std::endl;
+	mapstring.print();
 	return 0;
 }

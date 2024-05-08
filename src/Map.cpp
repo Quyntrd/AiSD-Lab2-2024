@@ -43,10 +43,10 @@ public:
 	UnorderedMap(const size_t size, const Key& min, const Value& max) : _table(size) {
 		std::random_device rd;
 		std::mt19937 gen(rd());
-		std::uniform_int_distribution<int> dis(min, max);
+		std::uniform_int_distribution<size_t> dis(min, max);
 		for (size_t i = 0; i < size; ++i) {
-			int key = dis(gen);
-			int value = dis(gen);
+			Key key = (Key)dis(gen);
+			Value value = (Value)dis(gen);
 			insert(key, value);
 		}
 	}
@@ -59,12 +59,7 @@ public:
 	void print() const {
 		for (const auto& list : _table) {
 			for (auto& node: list){
-				if (node.value == 0 && node.key == 0) {
-					std::cout << "Empty" << std::endl;
-				}
-				else{
-					std::cout << "Key: " << node.key << ", Value: " << node.value << std::endl;
-				}
+				std::cout << "Key: " << node.key << ", Value: " << node.value << std::endl;
 			}
 		}
 	}
