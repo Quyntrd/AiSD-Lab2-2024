@@ -30,13 +30,21 @@ class UnorderedMap {
 			if (!node.isdeleted) insert(node.key, node.value);
 		}
 	}
+	
 public:
-	UnorderedMap(size_t size): table(size, Node()) {}
+	UnorderedMap(size_t size): _table(size, Node()) {}
 	UnorderedMap(const UnorderedMap& other) {
 		_table = other._table;
 	}
-	~UnorderedMap() {
-		_table.clear();
+	UnorderedMap(size_t size, int min, int max) : _table(size, Node()) {
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<int> dis(min, max);
+		for (size_t i = 0; i < count; ++i) {
+			Key key = dis(gen);
+			Value value = dis(gen);
+			insert(key, value);
+		}
 	}
 	UnorderedMap& operator=(const UnorderedMap& other) {
 		if (this != &other) {
