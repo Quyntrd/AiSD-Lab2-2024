@@ -15,6 +15,7 @@ int main() {
 	map.insert(3, 12);
 	map.insert(35, 11);
 	map.insert(53, 11);
+	map.insert_or_assign(35, 34);
 	std::cout << "Map Search of 2" << std::endl;
 	std::cout << map.search(2) << std::endl;
 	std::cout << "Map Search of 3" << std::endl;
